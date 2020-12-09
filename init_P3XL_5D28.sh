@@ -22,20 +22,22 @@ fi
 
 # Connection watchdog
 printf "$newline" ;\
-	printf "Starting watchdog..." ;\
+	printf "Starting watchdog... " ;\
+\
 while true; do
 	# Remove old alias from /dev/
 	rm -f /dev/$alias >> watchdog.log 2>&1
 	# Create new alias in /dev/
 	ln -s rfcomm$rfcomm /dev/$alias >> watchdog.log 2>&1
-	# Connecting to device
+	# Connect to device
 	rfcomm connect $rfcomm $address $channel >> watchdog.log 2>&1
-	# Wait until rfcomm above fails, then loop
+	# Wait until rfcomm fails, then loop
 	wait
 # Break loop off into background process
 done &
+\
 # Print DONE message
-printf "$newline" ;\
+#printf "$newline" ;\
 	printf "DONE." ;\
 	printf "$newline" ;\
 \
