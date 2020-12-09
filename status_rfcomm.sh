@@ -13,9 +13,9 @@ newline="\n"
 #	exit
 #fi
 
-# Check script status
+# Check rfcomm status
 printf "$newline" ;\
-printf "Script status:" ;\
+printf "RFcomm status:" ;\
 printf "$newline" ;\
 systemctl status | grep -E rfcomm | grep -vE "grep|socat|status" ;\
 \
