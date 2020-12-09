@@ -15,22 +15,18 @@ fi
 
 # Kill rfcomm
 printf "$newline" ;\
-	printf "Killing RFCOMM..." ;\
-	printf "$newline" ;\
-killall rfcomm ;\
+	printf "Killing RFCOMM... " ;\
+killall rfcomm &&\
 \
 # Restart bluetooth to dump connections
 printf "$newline" ;\
-	printf "Restarting bluetooth..." ;\
-	printf "$newline" ;\
-systemctl restart bluetooth.service ;\
-	sleep 1 ;\
+	printf "Restarting bluetooth... " ;\
+systemctl restart bluetooth.service &&\
 \
-# Double check bluetooth came back up
+# Print DONE message
 printf "$newline" ;\
-	printf "Current bluetooth status:" ;\
+	printf "DONE." ;\
 	printf "$newline" ;\
-systemctl status bluetooth.service ;\
 \
 # Footer
 printf "$newline" ;\

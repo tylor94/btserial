@@ -4,17 +4,18 @@
 padding="echo"
 newline="\n"
 
-# Check rfcomm processes currently running
+# Check script processes currently running
 printf "$newline" ;\
 	printf "Processes running:" ;\
 	printf "$newline" ;\
-systemctl status | grep -E rfcomm | grep -vE "grep|socat|status" ;\
+systemctl status | grep -E "rfcomm|init_" | grep -vE "grep|socat|status|vim" ;\
 \
 # Check rfcomm devices currently listed in /dev/
 printf "$newline" ;\
 	printf "Devices listed:" ;\
 	printf "$newline" ;\
-ls -lah /dev/ | grep -E rfcomm ;\
+#ls -lah /dev/ | grep -E rfcomm ;\
+ls /dev/ | grep -E "rfcomm" ;\
 \
 # Footer
 printf "$newline" ;\
