@@ -32,20 +32,20 @@ printf "$newline" ;\
 rfcomm connect $rfcomm $address $channel &\
 	sleep 5 ;\
 \
-## Remove old alias from /dev/
-#printf "$newline" ;\
-#	printf "Removing old alias..." ;\
-#	printf "$newline" ;\
-#rm -f /dev/$alias ;\
-#	sleep 1 ;\
-#\
-## Create new alias in /dev/
-##printf "$newline" ;\
-#	printf "Creating new alias..." ;\
-#	printf "$newline" ;\
-#ln -s /dev/rfcomm$rfcomm /dev/$alias ;\
-#	sleep 1 ;\
-#\
+# Remove old alias from /dev/
+printf "$newline" ;\
+	printf "Removing old alias..." ;\
+	printf "$newline" ;\
+rm -f /dev/$alias ;\
+	sleep 1 ;\
+\
+# Create new alias in /dev/
+printf "$newline" ;\
+	printf "Creating new alias..." ;\
+	printf "$newline" ;\
+ln -s /dev/rfcomm$rfcomm /dev/$alias ;\
+	sleep 1 ;\
+\
 # Check this rfcomm device listed in /dev/
 printf "$newline" ;\
 	printf "Device listed:" ;\
