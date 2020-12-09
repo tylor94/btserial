@@ -33,7 +33,7 @@ printf "$newline" ;\
 # Create logfile if it doesn't exist already
 touch $alias.log ;\
 \
-# Connection Loop
+# Connection loop
 while true; do
 	# Remove old alias from /dev/
 	rm -f /dev/$alias >> $alias.log 2>&1
