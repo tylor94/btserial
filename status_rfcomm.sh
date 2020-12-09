@@ -4,25 +4,16 @@
 padding="echo"
 newline="\n"
 
-## Check for root
-#if [ "$EUID" -ne 0 ]
-#	then
-#		$padding
-#		echo "This script requires root."
-#		$padding
-#	exit
-#fi
-
-# Check rfcomm status
+# Check rfcomm processes
 printf "$newline" ;\
-printf "RFcomm status:" ;\
-printf "$newline" ;\
+	printf "RFcomm processes:" ;\
+	printf "$newline" ;\
 systemctl status | grep -E rfcomm | grep -vE "grep|socat|status" ;\
 \
 # Check device status
 printf "$newline" ;\
-printf "Device status:" ;\
-printf "$newline" ;\
+	printf "Device status:" ;\
+	printf "$newline" ;\
 ls -lah /dev/ | grep -E rfcomm ;\
 \
 # Footer
