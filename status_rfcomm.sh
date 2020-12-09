@@ -14,8 +14,7 @@ systemctl status | grep -E "rfcomm|init_" | grep -vE "grep|socat|status|vim" ;\
 printf "$newline" ;\
 	printf "Devices listed:" ;\
 	printf "$newline" ;\
-#ls -lah /dev/ | grep -E rfcomm ;\
-ls /dev/ | grep -E "rfcomm" ;\
+ls -lah /dev/ | grep -E rfcomm ;\
 \
 # Footer
 printf "$newline" ;\
