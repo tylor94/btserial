@@ -19,36 +19,24 @@ fi
 # Create logfile if it doesn't exist already
 touch ../var/$alias.log ;\
 \
-# Start ser2net port
-ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> ../var/$alias.log 2>&1 ;\
-\
-# Connection watchdog
-printf "$newline" ;\
-	printf "Starting watchdog... " ;\
-\
-# Bluetooth loop
+# Start bluetooth connection and socat loop watchdog
 while true; do
-	# Connect to device
+	# Connect to bluetooth device
 	rfcomm connect $rfcomm $address $channel >> ../var/$alias.log 2>&1
-	# Wait until rfcomm fails, then loop
+
+	# Start socat loop from ser2net back to serial device
+	socat pty,link=/dev/loop_$alias,raw tcp:$netaddress:$netport >> ../var/$alias.log 2>&1
+
+	# Wait until fail, then sleep and loop
+	# I'm not sure if it loops on rfcomm failure or socat failure, or both,
+	# or neither actually.
 	wait
 	sleep 5
-# Break loop off into background process
 done &
 \
-# Socat loop
-while true; do
-	# Loop network port from ser2net
-	socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport >> ../var/$alias.log 2>&1
-	# Wait until socat fails, then loop
-	wait
-	sleep 5
-# Break loop off into background process
-done &
+# Start ser2net port
+ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> ../var/$alias.log 2>&1 &&\
 \
 # Print DONE message
-	printf "DONE." ;\
+printf "DONE." ;\
 	printf "$newline" ;\
-\
-# Footer
-printf "$newline" ;\
