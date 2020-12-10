@@ -17,10 +17,10 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Create logfile if it doesn't exist already
-touch $alias.log ;\
+touch ../var/$alias.log ;\
 \
 # Start ser2net port
-ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> $alias.log 2>&1 ;\
+ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> ../var/$alias.log 2>&1 ;\
 \
 # Connection watchdog
 printf "$newline" ;\
@@ -29,7 +29,7 @@ printf "$newline" ;\
 # Bluetooth loop
 while true; do
 	# Connect to device
-	rfcomm connect $rfcomm $address $channel >> $alias.log 2>&1
+	rfcomm connect $rfcomm $address $channel >> ../var/$alias.log 2>&1
 	# Wait until rfcomm fails, then loop
 	wait
 	sleep 5
@@ -39,7 +39,7 @@ done &
 # Socat loop
 while true; do
 	# Loop network port from ser2net
-	socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport >> $alias.log 2>&1
+	socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport >> ../var/$alias.log 2>&1
 	# Wait until socat fails, then loop
 	wait
 	sleep 5
