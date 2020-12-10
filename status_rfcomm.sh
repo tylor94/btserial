@@ -17,7 +17,7 @@ fi
 printf "$newline" ;\
 	printf "Processes running: " ;\
 	printf "$newline" ;\
-systemctl status | grep -E "rfcomm|init_" | grep -vE "grep|socat|status|vim" ;\
+systemctl status | grep -E "rfcomm|init_|socat" | grep -vE "grep|status|vim" ;\
 \
 # Check rfcomm devices currently listed in /dev/
 printf "$newline" ;\

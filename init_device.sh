@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# This pulls in the variables file specified at runtime to fill out script appropriately
 source $1
 
 # Formatting variables
@@ -15,38 +16,37 @@ if [ "$EUID" -ne 0 ]
 	exit
 fi
 
-# Connection watchdog
-printf "$newline" ;\
-	printf "Starting watchdog... " ;\
-\
 # Create logfile if it doesn't exist already
 touch $alias.log ;\
 \
 # Start ser2net port
-ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 \
-	-C 8DATABITS \
-	-C NONE \
-	-C 1STOPBIT \
-	-C max-connections=10
-# Connection loop
+ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 ;\
+\
+# Loop network port back to serial device alias
+# This is so a program accessing a serial device doesn't stop it from being reconnected
+# Also break off into background process
+#socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport &\
+\
+# Connection watchdog
+printf "$newline" ;\
+	printf "Starting watchdog... " ;\
+\
+# Bluetooth loop
 while true; do
-	# I put the remove/create lines within the loop to break and re-make connections
-	# as bluetooth tries and retries to connect. Otherwise an alias may stay up 
-	# and hold an old connection open even when there's no underlying rfcomm port
-	
-	# Temporarily disabled, using ser2net instead
-
-	## Remove old alias from /dev/
-	#rm -f /dev/$alias >> $alias.log 2>&1
-	## Create new alias in /dev/
-	#ln -s rfcomm$rfcomm /dev/$alias >> $alias.log 2>&1
-	
 	# Connect to device
 	rfcomm connect $rfcomm $address $channel >> $alias.log 2>&1
 	# Wait until rfcomm fails, then loop
 	wait
-	# Slow the loop down to repeating no more than once every 5 seconds
-	# Otherwise it would spam a reconnection as fast as possible when disconnected
+	sleep 5
+# Break loop off into background process
+done &
+\
+# Socat loop
+while true; do
+	# Loop network port from ser2net
+	socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport
+	# Wait until socat fails, then loop
+	wait
 	sleep 5
 # Break loop off into background process
 done &
