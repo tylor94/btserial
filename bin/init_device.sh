@@ -16,18 +16,6 @@ if [ "$EUID" -ne 0 ]
 	exit
 fi
 
-# Config detect variable
-config="$1"
-
-# Check if config file was specified
-if [ "$config" -ne "*.conf" ]
-	then
-		$padding
-		echo "You must specify a config file."
-		$padding
-	exit
-fi
-
 # Create logfile if it doesn't exist already
 touch ../var/$alias.log ;\
 \
