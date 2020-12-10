@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# This pulls in the variables file specified at runtime to fill out script appropriately
+# Network address
+netaddress="$2"
+
+# Pull in variable files
 source $1
 
 # Formatting variables
@@ -19,7 +22,7 @@ fi
 # Create logfile if it doesn't exist already
 touch ../var/$alias.log ;\
 \
-# Device watchdog
+# Bluetooth watchdog
 while true; do
 	# Connect to bluetooth device
 	rfcomm connect $rfcomm $address $channel >> ../var/$alias.log 2>&1
@@ -27,22 +30,18 @@ while true; do
 	wait
 	sleep 5
 # Break loop into separate process
-done &
+done &\
 \
 ## Start ser2net port
-#ser2net -C ipv4:$netaddress:$netport:raw:0:/dev/rfcomm$rfcomm:9600 -8DATABITS -NONE -1STOPBIT -max-connections=10 &&\ #>> ../var/$alias.log 2>&1 &&\
+#ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> ../var/$alias.log 2>&1 ;\
+systemctl start ser2net >> ../var/$alias.log 2>&1 ;\
 \
 # Socat watchdog
 while true; do
-	# Start socat serial loopback
+	# Start serial loopback
 	socat pty,link=/dev/rfloop$rfcomm,raw tcp:$netaddress:$netport >> ../var/$alias.log 2>&1
 	# Wait until fail, then loop
 	wait
 	sleep 7
 # Break loop into separate process
-done &
-\
-# Print DONE message
-printf "$newline" ;\
-	printf "DONE." ;\
-	printf "$newline" ;\
+done &\
