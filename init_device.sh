@@ -22,15 +22,25 @@ printf "$newline" ;\
 # Create logfile if it doesn't exist already
 touch $alias.log ;\
 \
+# Start ser2net port
+ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 \
+	-C 8DATABITS \
+	-C NONE \
+	-C 1STOPBIT \
+	-C max-connections=10
 # Connection loop
 while true; do
 	# I put the remove/create lines within the loop to break and re-make connections
 	# as bluetooth tries and retries to connect. Otherwise an alias may stay up 
 	# and hold an old connection open even when there's no underlying rfcomm port
-	# Remove old alias from /dev/
-	rm -f /dev/$alias >> $alias.log 2>&1
-	# Create new alias in /dev/
-	ln -s rfcomm$rfcomm /dev/$alias >> $alias.log 2>&1
+	
+	# Temporarily disabled, using ser2net instead
+
+	## Remove old alias from /dev/
+	#rm -f /dev/$alias >> $alias.log 2>&1
+	## Create new alias in /dev/
+	#ln -s rfcomm$rfcomm /dev/$alias >> $alias.log 2>&1
+	
 	# Connect to device
 	rfcomm connect $rfcomm $address $channel >> $alias.log 2>&1
 	# Wait until rfcomm fails, then loop
