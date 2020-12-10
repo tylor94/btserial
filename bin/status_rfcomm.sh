@@ -23,7 +23,7 @@ systemctl status | grep -E "rfcomm|init_|socat|test" | grep -vE "grep|status|vim
 printf "$newline" ;\
 	printf "Serial devices: " ;\
 	printf "$newline" ;\
-ls -lah /dev/ | grep -E "rfcomm|loop_" ;\
+ls -lah /dev/ | grep -E "rfcomm|loop_|rfloop" ;\
 \
 # Check ser2net network ports currently listed in netstat
 printf "$newline" ;\
