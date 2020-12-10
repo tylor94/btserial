@@ -20,12 +20,7 @@ fi
 touch $alias.log ;\
 \
 # Start ser2net port
-ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 ;\
-\
-# Loop network port back to serial device alias
-# This is so a program accessing a serial device doesn't stop it from being reconnected
-# Also break off into background process
-#socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport &\
+ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> $alias.log 2>&1 ;\
 \
 # Connection watchdog
 printf "$newline" ;\
@@ -44,7 +39,7 @@ done &
 # Socat loop
 while true; do
 	# Loop network port from ser2net
-	socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport
+	socat pty,link=/dev/$alias,raw tcp:$netaddress:$netport >> $alias.log 2>&1
 	# Wait until socat fails, then loop
 	wait
 	sleep 5
