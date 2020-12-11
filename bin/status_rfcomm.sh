@@ -31,5 +31,13 @@ printf "$newline" ;\
 	printf "$newline" ;\
 netstat -ntulp | grep -E "ser2net|socat" ;\
 \
+# Check systemctl services status
+printf "$newline" ;\
+	printf "Systemctl service status: " ;\
+	printf "$newline" ;\
+systemctl status ser2net ;\
+printf "$newline" ;\
+systemctl status aprx ;\
+\
 # Footer
 printf "$newline" ;\
