@@ -14,16 +14,16 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Kill rfcomm
-killall rfcomm > /dev/null 2>&1 &&\
+killall rfcomm ;\
 \
-# Turn bluetooth power off
-bluetoothctl power off > /dev/null 2>&1 &&\
+## Turn bluetooth power off
+bluetoothctl power off ;\
 \
 # Stop bluetooth service
-systemctl stop bluetooth.service > /dev/null 2>&1 &&\
+systemctl stop bluetooth.service ;\
 \
 # Restart bluetooth service
-systemctl restart bluetooth.service > /dev/null 2>&1 &&\
+systemctl restart bluetooth.service ;\
 \
-# Turn bluetooth power on
-bluetoothctl power on > /dev/null 2>&1 &&\
+## Turn bluetooth power on
+bluetoothctl power on
