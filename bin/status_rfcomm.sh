@@ -14,10 +14,16 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Check script processes currently running
+# I wanted to see these in this specific order
 printf "$newline" ;\
 	printf "Processes running: " ;\
 	printf "$newline" ;\
-systemctl status | grep -E "rfcomm|init_|socat|test" | grep -vE "grep|status|vim|kern" ;\
+systemctl status | grep -E "init_" | grep -vE "grep|status|vim|kern" ;\
+	printf "$newline" ;\
+systemctl status | grep -E "rfcomm" | grep -vE "grep|status|vim|kern" ;\
+	printf "$newline" ;\
+systemctl status | grep -E "socat" | grep -vE "grep|status|vim|kern" ;\
+	printf "$newline" ;\
 \
 # Check rfcomm devices currently listed in /dev/
 printf "$newline" ;\
@@ -35,9 +41,15 @@ netstat -ntulp | grep -E "ser2net|socat" ;\
 printf "$newline" ;\
 	printf "Systemctl service status: " ;\
 	printf "$newline" ;\
-systemctl status ser2net ;\
-printf "$newline" ;\
-systemctl status aprx ;\
+	printf "$newline" ;\
+printf "Ser2net: " ;\
+	printf "$newline" ;\
+systemctl status ser2net | grep -E ".status|Active" ;\
+	printf "$newline" ;\
+	printf "$newline" ;\
+printf "Aprx: " ;\
+	printf "$newline" ;\
+systemctl status aprx | grep -E ".status|Active" ;\
 \
 # Footer
 printf "$newline" ;\

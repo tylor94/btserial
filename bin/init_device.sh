@@ -49,13 +49,15 @@ done &\
 # Start ser2net service instead of running single line config
 systemctl start ser2net >> ../var/$alias.log 2>&1 ;\
 \
-# Socat watchdog
-while true; do
-	# Start serial loopback
-	socat pty,link=/dev/rfloop$rfcomm,raw tcp:$netaddress:$netport >> ../var/$alias.log 2>&1
-	wait
-	# Wait before restarting loop
-	sleep 7
-	wait
-# Break loop into separate process
-done &\
+# !!! Socat seems to be doing weird stuff when I point it to ser2net ports. Serial starts misbehaving.
+# !!! I don't know why, but more testing is needed. Socat disabled for now.
+## Socat watchdog
+#while true; do
+#	# Start serial loopback
+#	socat pty,link=/dev/rfloop$rfcomm,raw tcp:$netaddress:$netport >> ../var/$alias.log 2>&1
+#	wait
+#	# Wait before restarting loop
+#	sleep 7
+#	wait
+## Break loop into separate process
+#done &\
