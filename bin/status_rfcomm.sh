@@ -18,11 +18,11 @@ fi
 printf "$newline" ;\
 	printf "Processes running: " ;\
 	printf "$newline" ;\
-systemctl status | grep -E "init_" | grep -vE "grep|status|vim|kern" ;\
+systemctl status | grep -E "init_device" | grep -vE "grep|status|vim" ;\
 	printf "$newline" ;\
-systemctl status | grep -E "rfcomm" | grep -vE "grep|status|vim|kern" ;\
+systemctl status | grep -E "rfcomm" | grep -vE "grep|status|vim" ;\
 	printf "$newline" ;\
-systemctl status | grep -E "socat" | grep -vE "grep|status|vim|kern" ;\
+systemctl status | grep -E "socat" | grep -vE "grep|status|vim" ;\
 	printf "$newline" ;\
 \
 # Check rfcomm devices currently listed in /dev/
