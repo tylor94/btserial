@@ -43,6 +43,8 @@ while true; do
 # Break loop into separate process
 done &\
 \
+# !!! Ser2net config doesn't seem to be running right with a single config line.
+# !!! Maybe I'm doing it wrong. More testing is needed. Using  ser2net service instead for now.
 ## Start ser2net port
 #ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> ../var/$alias.log 2>&1 ;\
 \
