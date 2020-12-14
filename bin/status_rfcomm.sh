@@ -39,17 +39,14 @@ netstat -ntulp | grep -E "ser2net|socat" ;\
 \
 # Check systemctl services status
 printf "$newline" ;\
-	printf "Systemctl service status: " ;\
-	printf "$newline" ;\
+printf "Systemctl service status: " ;\
 	printf "$newline" ;\
 printf "Ser2net: " ;\
 	printf "$newline" ;\
-systemctl status ser2net | grep -E ".status|Active" ;\
-	printf "$newline" ;\
-	printf "$newline" ;\
+systemctl status ser2net | grep -E ".status|Active:" ;\
 printf "Aprx: " ;\
 	printf "$newline" ;\
-systemctl status aprx | grep -E ".status|Active" ;\
+systemctl status aprx | grep -E ".status|Active:" ;\
 \
 # Footer
 printf "$newline" ;\

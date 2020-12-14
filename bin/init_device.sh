@@ -2,6 +2,9 @@
 
 # Network address
 netaddress="$2"
+# Only Ser2net and socat in this script uses this
+# These are disabled currently so this does nothing
+# Ser2net service uses its own config file
 
 # Pull in variable files
 source $1
@@ -48,8 +51,9 @@ done &\
 ## Start ser2net port
 #ser2net -C ipv4,$netaddress,$netport:raw:0:/dev/rfcomm$rfcomm:9600 -C 8DATABITS -C NONE -C 1STOPBIT -C max-connections=10 >> ../var/$alias.log 2>&1 ;\
 \
-# Start ser2net service instead of running single line config
-systemctl start ser2net >> ../var/$alias.log 2>&1 ;\
+# !!! Let ser2net start automatically with the system instead of this, temporarily
+## Start ser2net service instead of running single line config
+#systemctl start ser2net >> ../var/$alias.log 2>&1 ;\
 \
 # !!! Socat seems to be doing weird stuff when I point it to ser2net ports. Serial starts misbehaving.
 # !!! I don't know why, but more testing is needed. Socat disabled for now.
