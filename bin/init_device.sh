@@ -6,9 +6,6 @@ source $1
 # Network address
 netaddress="$2"
 
-# Ser2net config
-s2nconf="$3"
-
 # Formatting variables
 padding="echo"
 newline="\n"
@@ -49,7 +46,7 @@ done &\
 # Ser2net watchdog
 while true; do
 	# Start ser2net
-	ser2net -n -c $s2nconf >> ../var/$alias.log 2>&1
+	ser2net -n -c ser2net_$1 >> ../var/$alias.log 2>&1
 	wait
 	# Wait before restarting loop
 	sleep 5
