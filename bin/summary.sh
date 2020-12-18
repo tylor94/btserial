@@ -18,7 +18,7 @@ fi
 printf "$newline" ;\
 	printf "Processes running: " ;\
 	printf "$newline" ;\
-systemctl status | grep -E "init_device" | grep -vE "grep|status|vim" ;\
+systemctl status | grep -E "init_device|init_nonet_device" | grep -vE "grep|status|vim" ;\
 	printf "$newline" ;\
 systemctl status | grep -E "rfcomm" | grep -vE "grep|status|vim" ;\
 	printf "$newline" ;\
