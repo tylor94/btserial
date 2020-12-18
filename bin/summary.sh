@@ -47,6 +47,9 @@ systemctl status ser2net | grep -E ".status|Active:" ;\
 printf "Aprx: " ;\
 	printf "$newline" ;\
 systemctl status aprx | grep -E ".status|Active:" ;\
+printf "GPSd: " ;\
+	printf "$newline" ;\
+systemctl status gpsd | grep -E ".status|Active:" ;\
 \
 # Footer
 printf "$newline" ;\
