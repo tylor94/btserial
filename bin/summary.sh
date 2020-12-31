@@ -37,12 +37,9 @@ printf "Systemctl service status: " ;\
 printf "Ser2net: " ;\
 	printf "$newline" ;\
 systemctl status ser2net | grep -E ".status|Active:" ;\
-printf "Aprx: " ;\
+printf "APRX: " ;\
 	printf "$newline" ;\
 systemctl status aprx | grep -E ".status|Active:" ;\
-printf "Direwolf: " ;\
-	printf "$newline" ;\
-systemctl status direwolf | grep -E ".status|Active:" ;\
 printf "GPSd: " ;\
 	printf "$newline" ;\
 systemctl status gpsd | grep -E ".status|Active:" ;\
