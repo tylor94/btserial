@@ -16,7 +16,7 @@ fi
 # Check script processes currently running
 	printf "Processes running: " ;\
 	printf "$newline" ;\
-systemctl status | grep -E "init_device|init_nonet_device|rfcomm|socat|ser2net|aprx|gps" | grep -vE "grep|status|vim" ;\
+systemctl status | grep -E "init_device|init_nonet_device|rfcomm|socat|ser2net|aprx|gps|ntp" | grep -vE "grep|status|vim" ;\
 	printf "$newline" ;\
 \
 # Check rfcomm devices currently listed in /dev/
