@@ -36,13 +36,20 @@ printf "Systemctl service status: " ;\
 	printf "$newline" ;\
 printf "Ser2net: " ;\
 	printf "$newline" ;\
-systemctl status ser2net | grep -E ".status|Active:" ;\
+systemctl status ser2net | grep -E "Active:" ;\
+printf "$newline" ;\
 printf "APRX: " ;\
 	printf "$newline" ;\
-systemctl status aprx | grep -E ".status|Active:" ;\
-printf "GPSd: " ;\
+systemctl status aprx | grep -E "Active:" ;\
+printf "$newline" ;\
+printf "GPSd Socket: " ;\
 	printf "$newline" ;\
-systemctl status gpsd | grep -E ".status|Active:" ;\
+systemctl status gpsd.socket | grep -E "Active:" ;\
+printf "$newline" ;\
+printf "GPSd Service: " ;\
+	printf "$newline" ;\
+systemctl status gpsd.service | grep -E "Active:" ;\
+printf "$newline" ;\
 printf "NTP: " ;\
 	printf "$newline" ;\
-systemctl status ntp | grep -E ".status|Active:" ;\
+systemctl status ntp | grep -E "Active:" ;\
