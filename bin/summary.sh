@@ -28,7 +28,7 @@ ls -lah /dev/ | grep -E "rfcomm|loop_|rfloop|socat" ;\
 # Check ser2net network ports currently listed in netstat
 	printf "Network ports: " ;\
 	printf "$newline" ;\
-netstat -ntulp | grep -E "ser2net|socat|gps" ;\
+netstat -ntulp | grep -E "ser2net|socat|gps|init" ;\
 	printf "$newline" ;\
 \
 # Check systemctl services status
