@@ -18,7 +18,7 @@ fi
 	printf "$newline" ;\
 printf "Device & init:" ;\
 	printf "$newline" ;\
-systemctl status | grep -E "_device|init_" | grep -vE "grep|vim" ;\
+systemctl status | grep -E "_device|init_|launch_xastir" | grep -vE "grep|vim" ;\
 	printf "$newline" ;\
 printf "RFcomm:" ;\
 	printf "$newline" ;\
