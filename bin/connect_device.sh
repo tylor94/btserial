@@ -25,7 +25,7 @@ touch ../var/device_$alias.pid ;\
 # Bluetooth watchdog
 while true; do
 	# Connect rfcomm
-	rfcomm connect $rfcomm $address $channel >> ../log/device_$alias.log 2>&1
+	rfcomm -L 1 connect $rfcomm $address $channel >> ../log/device_$alias.log 2>&1
 	wait
 	# Wait before restarting loop
 	sleep 5

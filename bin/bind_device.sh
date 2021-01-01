@@ -23,4 +23,4 @@ touch ../log/device_$alias.log ;\
 touch ../var/device_$alias.pid ;\
 \
 # Bind rfcomm
-rfcomm bind $rfcomm $address $channel & >> ../log/device_$alias.log 2>&1
+rfcomm -L 1 bind $rfcomm $address $channel & >> ../log/device_$alias.log 2>&1
