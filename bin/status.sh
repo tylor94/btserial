@@ -30,7 +30,7 @@ systemctl status | grep -E "ser2net" | grep -vE "grep|vim|bin" ;\
 	printf "$newline" ;\
 printf "Everything else:" ;\
 	printf "$newline" ;\
-systemctl status | grep -E "socat|netcat|aprx|gps|ntp" | grep -vE "grep|vim|bin" ;\
+systemctl status | grep -E "socat|netcat|aprx|gps|ntp|xastir" | grep -vE "grep|vim|bin" ;\
 	printf "$newline" ;\
 \
 # Check rfcomm devices currently listed in /dev/
