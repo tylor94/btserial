@@ -14,7 +14,9 @@ if [ "$EUID" -ne 0 ]
 fi
 
 killall \
-	/bin/bash \
 	socat \
+	netcat \
+	rfcomm \
 	ser2net \
-	netcat
+	# Bash last
+	/bin/bash

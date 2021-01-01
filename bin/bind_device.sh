@@ -20,7 +20,7 @@ fi
 touch ../log/device_$alias.log ;\
 \
 # Create pidfile (currently unused)
-touch ../log/device_$alias.pid ;\
+touch ../var/device_$alias.pid ;\
 \
 # Bind rfcomm
 rfcomm bind $rfcomm $address $channel & >> ../log/device_$alias.log 2>&1

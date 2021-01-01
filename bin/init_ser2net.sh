@@ -17,15 +17,15 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Create logfile
-touch ../var/net_$alias.log ;\
+touch ../log/ser2net_$alias.log ;\
 \
 # Create pidfile (currently unused)
-touch ../var/net_$alias.pid ;\
+touch ../var/ser2net_$alias.pid ;\
 \
 # Ser2net watchdog
 while true; do
 	# Start ser2net
-	ser2net -n -c $2 >> ../var/net_$alias.log 2>&1
+	ser2net -n -c $2 >> ../log/ser2net_$alias.log 2>&1
 	wait
 	# Wait before restarting loop
 	sleep 5
