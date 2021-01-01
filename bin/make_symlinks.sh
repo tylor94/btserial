@@ -8,5 +8,6 @@ newline="\n"
 ln -s /etc/aprx.conf ../conf/ ;\
 ln -s /etc/ser2net.conf ../conf/ ;\
 ln -s ../conf/* ./ ;\
+ln -s ../conf2/* ./ ;\
 # Also make folder var
 mkdir ../var/ ;\
