@@ -17,15 +17,15 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Create logfile
-touch ../var/$alias.log ;\
+touch ../var/net_$alias.log ;\
 \
-# Create pidfile
-touch ../var/$alias.pid ;\
+# Create pidfile (currently unused)
+touch ../var/net_$alias.pid ;\
 \
-# Bluetooth watchdog
+# Ser2net watchdog
 while true; do
-	# Connect bluetooth device
-	rfcomm connect $rfcomm $address $channel >> ../var/$alias.log 2>&1
+	# Start ser2net
+	ser2net -n -c $2 >> ../var/net_$alias.log 2>&1
 	wait
 	# Wait before restarting loop
 	sleep 5

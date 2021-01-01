@@ -13,8 +13,5 @@ if [ "$EUID" -ne 0 ]
 	exit
 fi
 
-killall \
-	/bin/bash \
-	socat \
-	ser2net \
-	netcat
+# Release rfcomm
+rfcomm release /dev/$1
