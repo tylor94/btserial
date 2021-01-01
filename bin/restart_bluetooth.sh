@@ -16,7 +16,7 @@ fi
 # Kill rfcomm
 killall rfcomm ;\
 \
-## Turn bluetooth power off
+# Turn bluetooth power off
 bluetoothctl power off ;\
 \
 # Stop bluetooth service
@@ -25,5 +25,5 @@ systemctl stop bluetooth.service ;\
 # Restart bluetooth service
 systemctl restart bluetooth.service ;\
 \
-## Turn bluetooth power on
+# Turn bluetooth power on
 bluetoothctl power on
