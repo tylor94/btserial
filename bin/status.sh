@@ -55,14 +55,14 @@ printf "$newline" ;\
 printf "APRX: " ;\
 	printf "$newline" ;\
 systemctl status aprx | grep -E "Active:" ;\
-printf "$newline" ;\
-printf "GPSd Socket: " ;\
-	printf "$newline" ;\
-systemctl status gpsd.socket | grep -E "Active:" ;\
-printf "$newline" ;\
-printf "GPSd Service: " ;\
-	printf "$newline" ;\
-systemctl status gpsd.service | grep -E "Active:" ;\
+#printf "$newline" ;\
+#printf "GPSd Socket: " ;\
+#	printf "$newline" ;\
+#systemctl status gpsd.socket | grep -E "Active:" ;\
+#printf "$newline" ;\
+#printf "GPSd Service: " ;\
+#	printf "$newline" ;\
+#systemctl status gpsd.service | grep -E "Active:" ;\
 printf "$newline" ;\
 printf "NTP: " ;\
 	printf "$newline" ;\
