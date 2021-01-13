@@ -14,8 +14,11 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Check script processes currently running
-	printf "Processes running: " ;\
+printf " ---------- ---------- ----------" ;\
 	printf "$newline" ;\
+printf "Processes running: " ;\
+	printf "$newline" ;\
+printf "$newline" ;\
 printf "Device & init:" ;\
 	printf "$newline" ;\
 systemctl status | grep -E "_device|init_|launch_xastir" | grep -vE "grep|vim" ;\
@@ -34,20 +37,33 @@ systemctl status | grep -E "socat|netcat|aprx|gps|ntp|xastir" | grep -vE "grep|v
 	printf "$newline" ;\
 \
 # Check rfcomm devices currently listed in /dev/
-	printf "Serial devices: " ;\
+printf " ---------- ---------- ----------" ;\
 	printf "$newline" ;\
-ls -lah /dev/ | grep -E "rfcomm|loop_|rfloop|socat" ;\
+printf "Serial devices: " ;\
+	printf "$newline" ;\
+printf "$newline" ;\
+ls -lah /dev/ | grep -E "AMA|USB" ;\
+	printf "$newline" ;\
+ls -lah /dev/ | grep -E "rfcomm" ;\
+	printf "$newline" ;\
+ls -lah /dev/ | grep -E "loop_|rfloop|socat" ;\
 	printf "$newline" ;\
 \
 # Check ser2net network ports currently listed in netstat
-	printf "Network ports: " ;\
+printf " ---------- ---------- ----------" ;\
 	printf "$newline" ;\
+printf "Network ports: " ;\
+	printf "$newline" ;\
+printf "$newline" ;\
 netstat -ntulp | grep -E "ser2net|socat|gps|init" ;\
 	printf "$newline" ;\
 \
 # Check systemctl services status
+printf " ---------- ---------- ----------" ;\
+	printf "$newline" ;\
 printf "Systemctl service status: " ;\
 	printf "$newline" ;\
+printf "$newline" ;\
 printf "Ser2net: " ;\
 	printf "$newline" ;\
 systemctl status ser2net | grep -E "Active:" ;\
@@ -55,14 +71,14 @@ printf "$newline" ;\
 printf "APRX: " ;\
 	printf "$newline" ;\
 systemctl status aprx | grep -E "Active:" ;\
-#printf "$newline" ;\
-#printf "GPSd Socket: " ;\
-#	printf "$newline" ;\
-#systemctl status gpsd.socket | grep -E "Active:" ;\
-#printf "$newline" ;\
-#printf "GPSd Service: " ;\
-#	printf "$newline" ;\
-#systemctl status gpsd.service | grep -E "Active:" ;\
+printf "$newline" ;\
+printf "GPSd Socket: " ;\
+	printf "$newline" ;\
+systemctl status gpsd.socket | grep -E "Active:" ;\
+printf "$newline" ;\
+printf "GPSd Service: " ;\
+	printf "$newline" ;\
+systemctl status gpsd.service | grep -E "Active:" ;\
 printf "$newline" ;\
 printf "NTP: " ;\
 	printf "$newline" ;\
