@@ -5,5 +5,5 @@ padding="echo"
 newline="\n"
 
 # Make directories
-mkdir ../var/ ;\
-mkdir ../log/ ;\
+mkdir ./var/ ;\
+mkdir ./log/ ;\
