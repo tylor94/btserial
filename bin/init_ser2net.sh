@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Pull in variable files
-source $1
-
 # Formatting variables
 padding="echo"
 newline="\n"
@@ -15,6 +12,9 @@ if [ "$EUID" -ne 0 ]
 		$padding
 	exit
 fi
+
+# Pull in variable files
+source $1
 
 # Create logfile
 touch ../log/ser2net_$alias.log ;\
