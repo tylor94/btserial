@@ -21,6 +21,9 @@ touch ../var/socat_$2.pid ;\
 \
 # Socat watchdog
 while true; do
+	# Restart xastir
+	kill -SIGHUP `cat ~/.xastir/xastir.pid` >> ../log/socat_$2.log 2>&1
+
 	# Start socat
 	# Variables are net address and net port and are fed in when executing script
 	# Break off into own process
